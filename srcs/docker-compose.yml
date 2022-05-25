@@ -5,6 +5,7 @@ services:
 		#container 생성시 사용 할 이미지 지정
 		image: mariadb
 		# 컨테이너에 볼륨을 마운트 할 때에 사용 됩니다. (host:container)
+		# 마운트는 컴퓨터 과학에서 저장 장치에 접근할 수 있는 경로를 디렉터리 구조에 편입시키는 작업을 말한다
 		volumes:
 			- ~/data/maria:/var/lib/mysql
 		restart: always
@@ -57,6 +58,7 @@ services:
 volumes:
 	mariadb:
 		driver: local
+		 # - driver: 볼륨을 생성할 때 사용될 드라이버를 설정한다. 어떠한 설정도 하지않으면 local 로 지정된다.
 		driver_opts:
 			o: bind
 			type: none
@@ -71,3 +73,4 @@ volumes:
 networks:
 	inception:
 		driver: bridge
+		# 기본 네트워크 드라이버입니다. 드라이버를 지정하지 않으면 생성 중인 네트워크 유형이 됩니다. 브리지 네트워크는 일반적으로 통신이 필요한 독립 실행형 컨테이너에서 애플리케이션을 실행할 때 사용됩니다.
