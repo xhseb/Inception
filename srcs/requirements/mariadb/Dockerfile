@@ -1,9 +1,12 @@
+# 작업을 시작할 베이스 이미지를 지정
 FROM debian:buster
 
-MAINTAINER sonkang@student.42seoul.kr
+LABEL maintainer="sonkang@student.42seoul.kr"
 
-RUN apt-get update
-RUN apt-get install -y mariadb-server vim ;
+# 새 이미지 레이어를 만들어 내 명령을 실행하고 결과를 커밋한다.
+RUN apt-get update &&  apt-get install -y \
+	mariadb-server \
+	vim
 
 COPY tools/setup.sh .
 RUN chmod +x setup.sh
