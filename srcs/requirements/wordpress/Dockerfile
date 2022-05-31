@@ -1,6 +1,6 @@
 FROM debian:buster
 
-MAINTAINER sonkang@student.42seoul.kr
+LABEL maintainer="sonkang@student.42seoul.kr"
 
 RUN apt-get update
 RUN apt-get install -y php7.3-fpm \
