@@ -3,7 +3,6 @@ version: "3.8"
 
 # definition fo services
 services:
-
   # nginx
   nginx:
     build: ./requirements/nginx
@@ -59,17 +58,16 @@ networks:
 
 # definition fo volumes
 volumes:
-
   # maridb volume
   volume_mariadb:
     driver_opts:
-      device: /home/seoko/data/database
+      device: /home/sonkang/data/database
       type: volume
       o: bind
 
   # wordpress volume
   volume_wordpress:
     driver_opts:
-      device: /home/seoko/data/wordpress
+      device: /home/sonkang/data/wordpress
       type: volume
       o: bind
