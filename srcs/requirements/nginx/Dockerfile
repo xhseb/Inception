@@ -1,23 +1,21 @@
 FROM debian:buster
 
-RUN apt-get update && \
-	apt-get install -y nginx openssl dumb-init
+# install NGINX
+RUN     apt-get update -y
+RUN     apt-get upgrade -y
+RUN     apt-get install -y nginx
+RUN     apt-get install -y openssl
 
-RUN rm /etc/nginx/sites-available/default
-RUN rm /etc/nginx/sites-enabled/default
+# config NGINX
+COPY    conf/default /
+RUN     mv default /etc/nginx/sites-available/default
 
-COPY conf/nginx.conf /etc/nginx/sites-available/default
- 
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+RUN     openssl genrsa -out server.key 4096
+RUN     openssl req -new -key server.key -subj "/C=KR/ST=Seoul/O=42Seoul/OU=Lee" -out server.csr
+RUN     openssl req -x509 -in server.csr -key server.key -out server.crt
+RUN     mv server.crt /etc/ssl/certs/
+RUN     mv server.csr server.key /etc/ssl/private
 
-RUN mkdir /etc/nginx/ssl
-
-COPY ./tools/setup.sh /
-
-RUN chmod +x /setup.sh
+ENTRYPOINT     ["nginx", "-g", "daemon off;"]
 
 EXPOSE 443
-
-ENTRYPOINT [ "/usr/bin/dumb-init", "/setup.sh" ]
-
-CMD [ "nginx", "-g", "daemon off;" ]
