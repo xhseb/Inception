@@ -1,19 +1,20 @@
 #!/bin/bash
+set -e
 
-if [ ! -d "/var/lib/mysql/wordpress" ]; then
+if [ ! -d "/var/lib/mysql/wordpress" ]; then 
+    
+    mysql_install_db
 
-	mysql_install_db
-
-	service mysql start
-
-	mysql -e "CREATE USER '${MARIA_ID}'@'localhost' identified by '${MARIA_PW}';"
-	mysql -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-	mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MARIA_ID}'@localhost IDENTIFIED BY '${MARIA_PW}';"
-	mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MARIA_ID}'@'%' IDENTIFIED BY '${MARIA_PW}';"
-	mysql -e "UPDATE mysql.user SET Password = PASSWORD('${MARIA_PW}') WHERE User = 'root';"
+    service mysql start
+    mysql -e "CREATE DATABASE IF NOT EXISTS wordpress;" &&\
+    mysql -e "CREATE USER 'sonkang'@'localhost' identified by '1234';" &&\
+	mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sonkang'@localhost IDENTIFIED BY '1234';" &&\
+	mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'sonkang1'@'%' IDENTIFIED BY '1234';" &&\
+	mysql -e "UPDATE mysql.user SET Password = PASSWORD('1234') WHERE User = 'root'" &&\
 	mysql -e "FLUSH PRIVILEGES;"
-
-	mysqladmin -uroot -p${MARIA_PW} shutdown
+    service mysql stop 
 fi
 
-exec mysqld_safe
+sleep 3
+
+exec "$@"
