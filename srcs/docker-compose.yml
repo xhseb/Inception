@@ -55,6 +55,7 @@ services:
 # definition fo network
 networks:
   inception_network:
+    driver: bridge
 
 # definition fo volumes
 volumes:

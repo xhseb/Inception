@@ -16,11 +16,11 @@ if  [ ! -f /var/www/wordpress/wp-config.php ]; then
 	wp core --allow-root download --locale=ko_KR --force
 	while  [ ! -f /var/www/wordpress/wp-config.php ]; do
 
-		wp core config --allow-root --dbname=wordpress --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=mariadb:3306
+		wp core config --allow-root --dbname=wordpress --dbuser=${MARIA_USER} --dbpass=${MARIA_PASSWORD} --dbhost=mariadb:3306
 
 	done
-	wp core install --allow-root --url='localhost' --title='Welcome to sonkang`s Inception' --admin_user=${MYSQL_ROOT} --admin_password=${MYSQL_ROOT_PASSWORD}  --admin_email="sonkang@student.42seoul.kr" --path='/var/www/wordpress';
-	wp  user create --allow-root ${MYSQL_USER} zzzu5280@gmail.com --user_pass=${MYSQL_PASSWORD} --role=author
+	wp core install --allow-root --url='localhost' --title='Welcome to sonkang`s Inception' --admin_user=${MARIA_ROOT} --admin_password=${MARIA_ROOT_PASSWORD}  --admin_email="sonkang@student.42seoul.kr" --path='/var/www/wordpress';
+	wp  user create --allow-root ${MARIA_USER} zzzu5280@gmail.com --user_pass=${MARIA_PASSWORD} --role=author
 fi
 
 # create the PID file(/run/php/php7.3-fpm.pid)

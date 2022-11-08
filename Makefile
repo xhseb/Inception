@@ -1,5 +1,3 @@
-.PHONY:	all up fclean
-
 all:
 		sudo mkdir -p /home/sonkang/data/wordpress
 		sudo mkdir -p /home/sonkang/data/database
@@ -14,3 +12,5 @@ fclean:
 		sudo docker-compose -f srcs/docker-compose.yml down --rmi all --volumes
 		sudo docker rmi debian:buster
 		sudo rm -rf /home/sonkang/data
+
+.PHONY:	all up fclean
