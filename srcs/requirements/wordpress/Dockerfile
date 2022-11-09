@@ -21,6 +21,6 @@ COPY ./conf/wp-config.php /var/www/wordpress
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 RUN mkdir -p /run/php/
 
-ENTRYPOINT ["php-fpm7.3", "-F"]
-
 EXPOSE 9000
+
+ENTRYPOINT ["php-fpm7.3", "-F"]

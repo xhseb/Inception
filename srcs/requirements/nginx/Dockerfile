@@ -16,6 +16,6 @@ RUN     openssl req -x509 -in server.csr -key server.key -out server.crt
 RUN     mv server.crt /etc/ssl/certs/
 RUN     mv server.csr server.key /etc/ssl/private
 
-ENTRYPOINT     ["nginx", "-g", "daemon off;"]
-
 EXPOSE 443
+
+ENTRYPOINT     ["nginx", "-g", "daemon off;"]
